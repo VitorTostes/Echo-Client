@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echo | Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body class="main-container">
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-icon">
+        <img src="images/logo.png" alt="Logo Echo">
+      </div>
+      <span class="logo-text">Echo Assistant</span>
+    </div>
+    <button id="menuBtn" class="menu-button">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <aside class="sidebar">
+  <div class="sidebar-top">
+    <button class="sidebar-icon" onclick="location.href='index.html'">
+      <i class="fas fa-home"></i>
+    </button>
+    <button class="sidebar-icon" onclick="location.href='echoclient.html'">
+      <i class="fas fa-user-friends"></i>
+    </button>
+    <button class="sidebar-icon" onclick="location.href='assistant.html'">
+      <i class="fas fa-robot"></i>
+    </button>
+    <button class="sidebar-icon">
+      <i class="fas fa-cog"></i>
+    </button>
+  </div>
+  
+  <div class="sidebar-bottom">
+    <button class="sidebar-icon" onclick="location.href='profile.html'">
+      <i class="fas fa-user"></i>
+    </button>
+  </div>
+</aside>
+  <main class="main-content">
+    <section class="echoclient-section">
+      <h1>Bem-vindo ao Echo Assistant</h1>
+      <div class="chat-display" id="chatDisplay">
+      </div>
+    </section>
+  </main>
+  <!-- Área de chat similar mas pode personalizar -->
+  <div class="chat-container">
+   <div class="chat-input-wrapper">
+    <div class="chat-input-container">
+      <textarea 
+        placeholder="Digite sua mensagem..." 
+        class="chat-input" 
+        id="messageInput"
+        rows="1"
+      ></textarea>
+      <div class="chat-controls">
+        <button class="chat-icon" id="sendBtn">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+  <script src="assistant.js"></script>
+  <script src="/public/script.js"></script>
+</body>
+</html>

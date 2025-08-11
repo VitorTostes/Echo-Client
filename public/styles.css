@@ -1,0 +1,402 @@
+/* Cores base */
+:root {
+  --primary-bg: #1A1A1A;
+  --primary-text: #ffffff;
+  --header-bg: #1C1C1C;
+  --icon-bg: #71C5C9;
+  --hover-bg: #212121;
+  --border-color: #ffffff;
+  --accent-color: #71C5C9;
+  --secondary-text: #9ca3af;
+  --accent-light: #272727;
+  --muted-text: #242424;
+  --pure-white: #ffffff;
+}
+
+/* Definindo a fonte personalizada */
+@font-face {
+  font-family: 'uniNeue';
+  src: url('../fonts/Fontfabric\ -\ UniNeueBook.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'uniNeue';
+  src: url('../fonts/Fontfabric\ -\ UniNeueBold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Estilos globais */
+body {
+  margin: 0;
+  font-family: 'uniNeue', system-ui, sans-serif;
+  position: center;
+}
+
+/* Classes utilitárias */
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+/* Layout principal */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 48px;
+  background-color: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  z-index: 50;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Adicione esta linha */
+  width: 100%; /* Garante que ocupe toda a largura */
+  position: relative; /* Importante para posicionamento */
+}
+
+.logo-icon {
+  width: 125px;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1250px;
+  position: relative;
+  z-index: 2; /* Mantém o logo acima do texto */
+}
+
+.logo-icon img {
+  max-width: 120%;
+  max-height: 120%;
+  object-fit: contain;
+}
+
+.logo-text {
+  color: var(--pure-white);
+  font-size: 18px;
+  font-weight: 500;
+  text-align: right; /* Centraliza o texto */
+  width: 100%; /* Ocupa toda a largura disponível */
+  position: absolute; /* Posicionamento absoluto relativo ao header-content */
+  left: 48%; /* Move para o meio */
+  transform: translateX(-50%); /* Corrige o posicionamento */
+  z-index: 1; /* Garante que fique acima de outros elementos */
+}
+
+.menu-button {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  margin-right: 30px;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  background: transparent;
+}
+
+.menu-button i {
+  color: var(--pure-white);
+  font-size: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 48px;
+  height: calc(100vh - 48px);
+  width: 48px;
+  background-color: var(--header-bg);
+  border-right: 0.25px solid #71C5C9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Distribui os itens */
+  align-items: center;
+  padding: 16px 2px;
+  z-index: 40;
+}
+
+.sidebar-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 16px; /* Espaço extra na parte inferior */
+}
+
+.sidebar-icon {
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-icon:hover {
+  background-color: #343434;
+}
+
+.sidebar-icon i {
+  color: var(--secondary-text);
+  font-size: 18px;
+}
+
+.sidebar-icon.active i {
+  color: var(--accent-color);
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 64px;
+  width: 100%;
+  max-width: 768px;
+  padding: 0 16px 96px;
+}
+
+.welcome-section h1 {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #ffffff
+}
+
+.welcome-text {
+  margin-bottom: 16px;
+  color: var(--pure-white);
+}
+
+.welcome-subtext {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--accent-light);
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.action-btn {
+  padding: 16px 24px;
+  border-radius: 12px;
+  color: var(--pure-white);
+  font-weight: 600;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  border: none;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.action-btn:active {
+  transform: translateY(1px);
+}
+
+.blue-gradient {
+  background: #1C1C1C;
+   border: 1px solid #71C5C9
+}
+
+.blue-gradient:hover {
+   box-shadow: 0 0 20px 5px rgba(59, 237, 246, 0.5);
+}
+
+.purple-gradient {
+  background: #1C1C1C;
+   border: 1px solid #71C5C9
+}
+
+.purple-gradient:hover {
+  box-shadow: 0 0 20px 5px rgba(59, 237, 246, 0.5);
+}
+
+/* Chat Box */
+.chat-container {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 768px;
+  border: 1px solid #71C5C9;
+  background: #212121;
+  border-radius: 25px;
+  padding: 15px 15px 0 15px; /* Reduz o padding inferior */
+  box-sizing: border-box;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-content {
+  position: relative;
+  width: 100%;
+}
+
+.chat-box {
+  max-width: 768px;
+  width: 100%;
+  position: relative;
+  max-height: 200px;
+  padding: 15px;
+  background-color: var(--header-bg);
+  border-radius: 12px;
+  color: #212121;
+  background-color: transparent;
+  overflow: hidden;
+  padding-right: 8px;
+  position: relative;
+  padding-bottom: 50px;
+}
+
+/* Container do chat-input com footer */
+.chat-input-container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.chat-input {
+  font-family: 'uniNeue', sans-serif;
+  width: 100%;
+  margin-bottom: 0;
+  min-height: 50px;
+  max-height: 180px;
+  box-sizing: border-box;
+  border: 1px solid #212121;
+  background-color: #212121;
+  color: #ffffff;
+  font-size: 14px;
+  resize: none;
+  overflow-y: auto;
+}
+
+.chat-input-wrapper {
+  width: 100%;
+  margin-bottom: 50px; /* Espaço entre input e footer */
+}
+
+.chat-input::placeholder {
+  color: var(--secondary-text);
+  opacity: 0.7;
+  transform: translateY(1px);
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: #212121;
+}
+
+.chat-input::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+
+.chat-input::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 12px 0;
+  border-radius: 10px;
+}
+
+.chat-input::-webkit-scrollbar-thumb {
+  background-color: rgba(113, 197, 201, 0.3);
+  border-radius: 5px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  transition: background-color 0.3s ease;
+}
+
+.chat-input::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(113, 197, 201, 0.5);
+}
+
+/* Controles */
+.chat-controls {
+  position: absolute;
+  right: -3px;
+  bottom: -38px;
+  z-index: 2;
+}
+
+.chat-icon {
+  padding: 10px;
+  border-radius: 9999px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+.chat-icon:hover {
+  background-color: var(--primary-text);
+}
+.chat-icon i {
+  color: var(--accent-color);
+  font-size: 16px;
+}
