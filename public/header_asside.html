@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echo | Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-bg: #1A1A1A;
+      --primary-text: #ffffff;
+      --header-bg: #1C1C1C;
+      --accent-color: #71C5C9;
+      --secondary-text: #9ca3af;
+      --pure-white: #ffffff;
+    }
+
+    @font-face {
+  font-family: 'uniNeue';
+  src: url('../fonts/Fontfabric\ -\ UniNeueBook.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'uniNeue';
+  src: url('../fonts/Fontfabric\ -\ UniNeueBold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+    body {
+      margin: 0;
+      font-family: system-ui, sans-serif;
+      color: var(--primary-text);
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 48px;
+      background-color: var(--header-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 50;
+    }
+
+    .logo-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+   .logo-icon {
+  width: 125px;
+  height: 125px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1250px;
+  position: relative;
+  z-index: 2; /* Mantém o logo acima do texto */
+}
+
+.logo-icon img {
+  max-width: 110%;
+  max-height: 120%;
+  object-fit: contain;
+}
+
+.logo-text {
+  color: var(--pure-white);
+  font-size: 18px;
+  font-weight: 300;
+  text-align: right; /* Centraliza o texto */
+  width: 100%; /* Ocupa toda a largura disponível */
+  position: absolute; /* Posicionamento absoluto relativo ao header-content */
+  left: 48%; /* Move para o meio */
+  transform: translateX(-50%); /* Corrige o posicionamento */
+  z-index: 1; /* Garante que fique acima de outros elementos */
+}
+
+.menu-button {
+  background: transparent;
+  border: none;
+  padding: 5px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.menu-button i {
+  color: var(--pure-white);
+  font-size: 20px;
+}
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 48px;
+      height: calc(100vh - 48px);
+      width: 48px;
+      background-color: var(--header-bg);
+      border-right: 0.25px solid var(--accent-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 0;
+      z-index: 40;
+      transition: transform 0.3s ease;
+    }
+
+    .sidebar.hidden {
+      transform: translateX(-48px);
+    }
+
+    .sidebar-top, .sidebar-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .sidebar-icon {
+      background: none;
+      border: none;
+      color: var(--secondary-text);
+      font-size: 18px;
+      cursor: pointer;
+      padding: 8px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .sidebar-icon:hover {
+      color: var(--pure-white);
+    }
+
+    .sidebar-icon.active {
+      color: var(--accent-color);
+    }
+
+    /* Área de conteúdo */
+    .content-area {
+      margin-left: 48px;
+      margin-top: 48px;
+      padding: 20px;
+      min-height: calc(100vh - 48px);
+      transition: margin-left 0.3s ease;
+    }
+
+    .content-area.expanded {
+      margin-left: 0;
+    }
+  </style>
+</head>
+<body class="main-container">
+  <header class="header">
+    <div class="header-content">
+      <div class="logo-icon">
+         <img src="images/logo.png" alt="Logo Echo" class="logo-image">
+      </div>
+      <span class="logo-text">Echo | Home</span>
+    </div>
+    <button id="menuBtn" class="menu-button">
+      <i class="fas fa-bars"></i>
+    </button>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+   <div class="sidebar-top">
+      <button class="sidebar-icon" data-page="arquivo.html">
+        <i class="fas fa-home"></i>
+      </button>
+      <button class="sidebar-icon" data-page="arquivo.html">
+        <i class="fas fa-user-friends"></i>
+      </button>
+      <button class="sidebar-icon" data-page="arquivo.html">
+        <i class="fas fa-cog"></i>
+      </button>
+    </div>
+    <div class="sidebar-bottom">
+      <button class="sidebar-icon" data-page="profile.html">
+        <i class="fas fa-user"></i>
+      </button>
+    </div>
+</aside>
+
+  <!-- Área de conteúdo (será preenchida dinamicamente) -->
+  <main id="contentArea" class="content-area">
+    <!-- O conteúdo das páginas será carregado aqui -->
+  </main>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('menuBtn');
+    const sidebar = document.querySelector('.sidebar');
+    const contentArea = document.getElementById('contentArea');
+    const sidebarIcons = document.querySelectorAll('.sidebar-icon');
+
+    // Controle do menu sidebar
+    if (menuBtn && sidebar) {
+      menuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('hidden');
+        contentArea.classList.toggle('expanded');
+        
+        // Altera o ícone do botão
+        const icon = menuBtn.querySelector('i');
+        icon.classList.toggle('fa-bars');
+        icon.classList.toggle('fa-times');
+      });
+    }
+
+    // Configura os botões da sidebar
+    sidebarIcons.forEach(icon => {
+      icon.addEventListener('click', () => {
+        const page = icon.getAttribute('data-page');
+        loadPage(page);
+      });
+    });
+
+    // Função para carregar páginas (versão melhorada)
+    async function loadPage(page) {
+      try {
+        const response = await fetch(page);
+        if (!response.ok) throw new Error(`Página não encontrada (${response.status})`);
+        const content = await response.text();
+        
+        // Insere o conteúdo na área dinâmica
+        contentArea.innerHTML = content;
+        document.title = `Echo | ${page.replace('.html', '').replace(/\b\w/g, l => l.toUpperCase())}`;
+        
+        // Extrai e executa os scripts do conteúdo carregado
+        const scripts = contentArea.querySelectorAll('script');
+        scripts.forEach(script => {
+          const newScript = document.createElement('script');
+          if (script.src) {
+            newScript.src = script.src;
+            newScript.async = false;
+          } else {
+            newScript.textContent = script.textContent;
+          }
+          document.body.appendChild(newScript).remove();
+        });
+
+        // Atualiza o menu ativo
+        updateActiveMenu(page);
+        
+        // Rola para o topo
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+      } catch (error) {
+        console.error('Erro ao carregar a página:', error);
+        contentArea.innerHTML = `
+          <div class="error-message" style="padding: 20px; color: #ff6b6b;">
+            <h2>Erro ao carregar a página</h2>
+            <p>${error.message}</p>
+            <button onclick="loadPage('listaclient.html')" 
+                    style="padding: 8px 16px; background: var(--accent-color); border: none; border-radius: 4px; cursor: pointer;">
+              Voltar para página inicial
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    // Função auxiliar para atualizar o menu ativo
+    function updateActiveMenu(currentPage) {
+      sidebarIcons.forEach(icon => {
+        icon.classList.remove('active');
+        if (icon.getAttribute('data-page') === currentPage) {
+          icon.classList.add('active');
+        }
+      });
+    }
+
+    // Trata o botão voltar/avançar do navegador
+    window.addEventListener('popstate', (event) => {
+      if (event.state && event.state.page) {
+        loadPage(event.state.page);
+      }
+    });
+  });
+</script>
+</body>
+</html>

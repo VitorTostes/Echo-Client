@@ -1,0 +1,213 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Chat Box */
+    .chat-container {
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 768px;
+      border: 1px solid #71C5C9;
+      background: #212121;
+      border-radius: 25px;
+      padding: 15px 15px 0 15px;
+      box-sizing: border-box;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+    }
+
+    @font-face {
+  font-family: 'uniNeue';
+  src: url('../fonts/Fontfabric\ -\ UniNeueBook.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'uniNeue';
+  src: url('../fonts/Fontfabric\ -\ UniNeueBold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+    .chat-content {
+      position: relative;
+      width: 100%;
+    }
+
+    .chat-box {
+      max-width: 768px;
+      width: 100%;
+      position: relative;
+      max-height: 200px;
+      padding: 15px;
+      background-color: transparent;
+      border-radius: 12px;
+      color: #212121;
+      overflow: hidden;
+      padding-right: 8px;
+      padding-bottom: 50px;
+    }
+
+    /* Container do chat-input com footer */
+    .chat-input-container {
+      position: relative;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .chat-input {
+      font-family: Arial, sans-serif;
+      width: 100%;
+      margin-bottom: 0;
+      min-height: 50px;
+      max-height: 180px;
+      box-sizing: border-box;
+      border: 1px solid #212121;
+      background-color: #212121;
+      color: #ffffff;
+      font-size: 14px;
+      resize: none;
+      overflow-y: auto;
+      padding: 5px;
+      border-radius: 12px;
+    }
+
+    .chat-input-wrapper {
+      width: 100%;
+      margin-bottom: 50px;
+    }
+
+    .chat-input::placeholder {
+      color: #a0a0a0;
+      opacity: 0.7;
+      transform: translateY(1px);
+    }
+
+    .chat-input:focus {
+      outline: none;
+    }
+
+    .chat-input::-webkit-scrollbar {
+      width: 10px;
+      background: transparent;
+    }
+
+    .chat-input::-webkit-scrollbar-track {
+      background: transparent;
+      margin: 12px 0;
+      border-radius: 10px;
+    }
+
+    .chat-input::-webkit-scrollbar-thumb {
+      background-color: rgba(113, 197, 201, 0.3);
+      border-radius: 5px;
+      border: 3px solid transparent;
+      background-clip: content-box;
+      transition: background-color 0.3s ease;
+    }
+
+    .chat-input::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(113, 197, 201, 0.5);
+    }
+
+    /* Controles */
+    .chat-controls {
+      position: absolute;
+      right: -3px;
+      bottom: -38px;
+      z-index: 2;
+    }
+
+    .chat-icon {
+      padding: 10px;
+      border-radius: 9999px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: background-color 150ms ease;
+    }
+    .chat-icon:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    .chat-icon i {
+      color: #71C5C9;
+      font-size: 16px;
+    }
+  </style>
+
+  <div class="chat-container">
+    <div class="chat-input-wrapper">
+      <div class="chat-input-container">
+        <textarea 
+          placeholder="Digite sua mensagem..." 
+          class="chat-input" 
+          id="messageInput"
+          rows="1"
+        ></textarea>
+        <div class="chat-controls">
+          <button class="chat-icon" id="sendBtn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const messageInput = document.getElementById('messageInput');
+      const sendBtn = document.getElementById('sendBtn');
+
+      if (!messageInput || !sendBtn) return;
+
+      const adjustTextarea = () => {
+        messageInput.style.height = 'auto';
+        const needsScroll = messageInput.scrollHeight > 180;
+        const newHeight = Math.min(messageInput.scrollHeight, 180);
+        
+        messageInput.style.height = `${newHeight}px`;
+        messageInput.style.paddingRight = needsScroll ? '16px' : '10px';
+        messageInput.style.overflowY = needsScroll ? 'scroll' : 'hidden';
+        
+        if (needsScroll) {
+          requestAnimationFrame(() => {
+            messageInput.scrollTop = messageInput.scrollHeight;
+          });
+        }
+      };
+
+      function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message) {
+          console.log('Mensagem enviada:', message);
+          messageInput.value = '';
+          adjustTextarea();
+        }
+      }
+
+      messageInput.addEventListener('input', adjustTextarea);
+      sendBtn.addEventListener('click', sendMessage);
+      messageInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      adjustTextarea();
+
+      // Código adicional da referência (opcional)
+      const chatContent = document.querySelector('.chat-content');
+      if (chatContent && messageInput) {
+        const container = document.createElement('div');
+        container.className = 'chat-input-container';
+        messageInput.parentNode.insertBefore(container, messageInput);
+        container.appendChild(messageInput);
+      }
+    });
+  </script>
+</body>
+</html>

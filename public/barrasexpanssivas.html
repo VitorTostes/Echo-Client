@@ -1,0 +1,290 @@
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+
+     @font-face {
+      font-family: 'uniNeue';
+      src: url('../fonts/Fontfabric-UniNeueBook.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: 'uniNeue';
+      src: url('../fonts/Fontfabric-UniNeueBold.otf') format('opentype');
+      font-weight: bold;
+      font-style: normal;
+    }
+
+:root {
+  --primary-bg: #1A1A1A;
+  --primary-text: #ffffff;
+  --header-bg: #1C1C1C;
+  --icon-bg: #71C5C9;
+  --hover-bg: #212121;
+  --border-color: #ffffff;
+  --accent-color: #71C5C9;
+  --secondary-text: #9ca3af;
+  --accent-light: #272727;
+  --muted-text: #242424;
+  --pure-white: #ffffff;
+}
+ /* Seções Expansíveis */
+    .section {
+      background-color: var(--header-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 0.25px solid #71C5C9;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin: 15;
+    }
+
+    .section-header {
+      padding: 10px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .section-header:hover {
+      background-color: #343434;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: normal;
+      color: #ffffff;
+      margin: 0;
+      font-family: 'uniNeue', sans-serif;
+    }
+
+    .section-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+      background-color: #2a2a2a;
+    }
+
+    .section.active .section-content {
+      max-height: 1000px;
+      padding: 0 20px 20px;
+    }
+
+    .section-arrow {
+      color: #ffffff;
+      transition: transform 0.3s ease;
+    }
+
+    .section.active .section-arrow {
+      transform: rotate(180deg);
+    }
+
+    /* Tabela */
+    .history-table {
+      font-family: 'uniNeue', sans-serif;
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      color: #ffffff;
+    }
+
+    .history-table th {
+      font-family: 'uniNeue', sans-serif;
+      color: #ffffff;
+      text-align: left;
+      padding: 12px 15px;
+      background-color: rgba(0,0,0,0.1);
+    }
+
+    .history-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--header-bg);
+    }
+
+    .feedback-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .feedback-link:hover {
+      opacity: 0.8;
+    }
+
+    /* Tabela */
+    .note-table {
+      font-family: 'uniNeue', sans-serif;
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      color: #ffffff;
+    }
+
+    .note-table th {
+      text-align: left;
+      font-family: 'uniNeue', sans-serif;
+      padding: 12px 15px;
+      background-color: rgba(0,0,0,0.1);
+      color: #ffffff;
+    }
+
+    .note-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid var(--header-bg);
+    }
+
+    .feedback-link {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .feedback-link:hover {
+      opacity: 0.8;
+    }
+
+    /* Seções Internas */
+    .teacher-section {
+      font-family: 'uniNeue', sans-serif;
+      color: #ffffff;
+      margin: 20px 0;
+    }
+
+    .teacher-section h3 {
+      color: var(--accent-light);
+      margin-bottom: 10px;
+    }
+
+    .about-text {
+      font-family: 'uniNeue', sans-serif;
+      color: #ffffff;
+      line-height: 1.7;
+      padding: 5px 0;
+    }
+
+    /* Responsividade */
+   
+  </style>
+      </div>
+      <!-- Histórico -->
+      <section class="section" id="history-section">
+        <div class="section-header" aria-expanded="false" aria-controls="history-content">
+          <h2 class="section-title">Histórico</h2>
+          <i class="fas fa-chevron-down section-arrow" aria-hidden="true"></i>
+        </div>
+        <div class="section-content" id="history-content">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Echo Client</th>
+                <th>Data</th>
+                <th>Nota</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Echo Client 1</td>
+                <td>29/07/2025</td>
+                <td>10.0</td>
+                <td><a href="#" class="feedback-link">Ver feedback</a></td>
+              </tr>
+              <tr>
+                <td>Echo Client 3</td>
+                <td>29/07/2025</td>
+                <td>10.0</td>
+                <td><a href="#" class="feedback-link">Ver feedback</a></td>
+              </tr>
+              <tr>
+                <td>Echo Client 8</td>
+                <td>29/07/2025</td>
+                <td>10.0</td>
+                <td><a href="#" class="feedback-link">Ver feedback</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Professores -->
+      <section class="section" id="teachers-section">
+        <div class="section-header" aria-expanded="false" aria-controls="teachers-content">
+          <h2 class="section-title">Professores</h2>
+          <i class="fas fa-chevron-down section-arrow" aria-hidden="true"></i>
+        </div>
+        <div class="section-content" id="teachers-content">
+          <div class="teacher-section">
+            <h3>Turma</h3>
+            <p>Informações sobre a turma e colegas de classe.</p>
+          </div>
+          
+          <div class="teacher-section">
+            <h3>Estudos</h3>
+            <p>Materiais e recursos recomendados pelos professores.</p>
+          </div>
+          
+          <div class="teacher-section">
+            <h3>Anotações</h3>
+            <p>Suas anotações pessoais e observações.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Anotações -->
+      <section class="section" id="note-section">
+        <div class="section-header" aria-expanded="false" aria-controls="note-content">
+          <h2 class="section-title">Anotações</h2>
+          <i class="fas fa-chevron-down section-arrow" aria-hidden="true"></i>
+        </div>
+        <div class="section-content" id="note-content">
+          <table class="note-table">
+            <thead>
+              <tr>
+                <th>Echo Client</th>
+                <th>Data</th>
+                <th>Nota</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Echo Client 1</td>
+                <td>29/07/2025</td>
+                <td>10.0</td>
+                <td><a href="#" class="feedback-link">Ver Anotações</a></td>
+              </tr>
+              <tr>
+                <td>Echo Client 3</td>
+                <td>29/07/2025</td>
+                <td>10.0</td>
+                <td><a href="#" class="feedback-link">Ver Anotações</a></td>
+              </tr>
+              <tr>
+                <td>Echo Client 8</td>
+                <td>29/07/2025</td>
+                <td>10.0</td>
+                <td><a href="#" class="feedback-link">Ver Anotações</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // Seções Expansíveis
+      document.querySelectorAll('.section-header').forEach(header => {
+        header.addEventListener('click', () => {
+          const section = header.parentElement;
+          const isExpanded = section.classList.toggle('active');
+          header.setAttribute('aria-expanded', isExpanded);
+        });
+      });
+
+      initCharts();
+    });
+  </script>
+</body>
+</html>

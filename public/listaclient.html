@@ -1,0 +1,182 @@
+<style>
+  :root {
+    --accent-color: #71C5C9;
+    --header-bg: #212121;
+    --primary-text: #ffffff;
+  }
+
+  .client-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .client-header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .client-header-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .header-button {
+    background-color: var(--accent-color);
+    color: #1A1A1A;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: all 0.2s ease;
+  }
+
+  .header-button:hover {
+    background-color: #343434;
+    color: #ffffff;
+    transform: translateY(-2px);
+  }
+
+  .client-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .client-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .client-btn {
+    background-color: var(--header-bg);
+    border: 1px solid var(--accent-color);
+    border-radius: 12px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .client-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(113, 197, 201, 0.3);
+  }
+
+  .client-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .client-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+
+  .client-name {
+    font-weight: bold;
+    flex-grow: 1;
+  }
+
+  .status-bar {
+    height: 4px;
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .status-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.2) 100%);
+    opacity: 0.6;
+    animation: shimmer 2s infinite linear;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .status-red { background-color: #F44336; }
+  .status-orange { background-color: #FF9800; }
+  .status-yellow { background-color: #FFEB3B; }
+  .status-green { background-color: #4CAF50; }
+</style>
+
+<div class="client-container">
+  <div class="client-header-container">
+    <h1>Selecione um Client</h1>
+    <div class="client-header-buttons">
+      <button class="header-button">
+        <i class="fas fa-history"></i> Histórico
+      </button>
+      <button class="header-button">
+        <i class="fas fa-map-marker-alt"></i> Check Points
+      </button>
+    </div>
+  </div>
+  
+  <div class="client-list" id="clientList">
+    <!-- Os clientes serão carregados aqui pelo JavaScript -->
+  </div>
+</div>
+
+<script>
+  // Função para criar um elemento de cliente
+  function createClientElement(client) {
+    const element = document.createElement('div');
+    element.className = 'client-btn';
+    element.innerHTML = `
+      <div class="client-header">
+        <img src="${client.avatar || 'images/avatars/default-avatar.png'}" 
+             alt="${client.name}" 
+             class="client-avatar">
+        <div class="client-name">${client.name}</div>
+        <i class="fas fa-chevron-right"></i>
+      </div>
+      <div class="status-bar status-${client.status || 'green'}"></div>
+    `;
+    element.addEventListener('click', () => console.log('Client selecionado:', client));
+    return element;
+  }
+
+  // Carrega os clientes imediatamente (sem esperar DOMContentLoaded)
+  const initialClients = [
+    { id: 1, name: "Echo Client 1", status: "red", avatar: "images/avatars/1.png" },
+    { id: 2, name: "Echo Client 2", status: "orange", avatar: "images/avatars/2.png" },
+    { id: 3, name: "Echo Client 3", status: "yellow", avatar: "images/avatars/3.png" },
+    { id: 4, name: "Echo Client 4", status: "green", avatar: "images/avatars/4.png" },
+    { id: 5, name: "Echo Client 5", status: "red", avatar: "images/avatars/5.png" },
+    { id: 6, name: "Echo Client 6", status: "orange", avatar: "images/avatars/6.png" }
+  ];
+
+  // Carrega os clientes
+  const clientList = document.getElementById('clientList');
+  if (clientList) {
+    initialClients.forEach(client => {
+      clientList.appendChild(createClientElement(client));
+    });
+  }
+
+  // Configura eventos dos botões
+  document.querySelectorAll('.header-button').forEach(button => {
+    button.addEventListener('click', () => {
+      console.log('Ação:', button.textContent.trim());
+    });
+  });
+</script>

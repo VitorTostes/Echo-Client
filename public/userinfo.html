@@ -1,0 +1,243 @@
+
+  <style>
+
+@font-face {
+ font-family: 'uniNeue';
+ src: url('../fonts/Fontfabric\ -\ UniNeueBook.otf') format('truetype');
+ font-weight: normal;
+ font-style: normal;
+}
+
+@font-face {
+  font-family: 'uniNeue';
+  src: url('../fonts/Fontfabric\ -\ UniNeueBold.otf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+    /* Estilos Base */
+    .profile-container {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    /* Seção do Perfil */
+    .profile-header {
+      border-radius: 12px;
+      padding: 5px 25px 0px 25px;
+      position: relative;
+
+    }
+
+    .profile-name-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .profile-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .profile-name {
+      font-family: 'uniNeue', sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffffff;
+      margin: 0;
+      flex-grow: 1;
+    }
+
+/* NOVOS ESTILOS PARA A SEÇÃO COMPACTA */
+    .compact-info-section {
+      font-family: 'uniNeue', bold;
+      margin-top: 10px;
+      background-color: #242424;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      max-height: 40px;
+    }
+
+    .compact-info-section.active {
+      max-height: 150px;
+    }
+
+    .compact-info-toggle {
+      justify-content: space-between; /* Alinha os itens nas extremidades */
+      display: flex;
+      align-items: center;
+      padding: 8px 15px;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    .compact-info-toggle i {
+      order: 2; /* Move o ícone para o final (direita) */
+      margin-left: 8px; /* Espaço entre texto e ícone */
+      margin-right: 0; /* Remove a margem direita anterior */
+      margin-right: 8px;
+      transition: transform 0.3s ease;
+      font-family: 'uniNeue', sans-serif;
+      font-weight: bold;
+      font-size: 12px;
+    }
+
+    .compact-info-section.active .compact-info-toggle i {
+      transform: rotate(180deg);
+    }
+
+    .compact-info-content {
+      padding: 10px 15px 10px 35px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 5px;
+    }
+
+    .compact-info-row {
+      font-family: 'uniNeue', sans-serif;
+      display: flex;
+      font-size: 14px;
+    }
+
+    .compact-info-label {
+      color: #a4a4a4;
+      min-width: 80px;
+      font-weight: bold;
+    }
+
+    .compact-info-value {
+      color: #ffffff;
+    }
+
+    /* Botão Editar */
+    .edit-button {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: none;
+      border: none;
+      color: #71C5C9;
+      cursor: pointer;
+      font-family: 'uniNeue', bold;
+      font-weight: bold;
+      font-size: 14px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .edit-button:hover {
+      background-color: rgba(113, 197, 201, 0.1);
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .info-pair {
+        flex-direction: column;
+        gap: 12px;
+      }
+      
+      .info-item {
+        min-width: 100%;
+      }
+      
+      .profile-name-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .circle-container {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+      
+      .profile-header {
+        padding: 20px 15px;
+      }
+      
+      .edit-button {
+        top: 15px;
+        right: 15px;
+      }
+    }
+  </style>
+  <main class="main-content">
+    <div class="profile-container">
+      <!-- Seção do Perfil -->
+      <section class="profile-header">
+        <button class="edit-button" aria-label="Editar perfil">Editar</button>
+        
+        <div class="profile-name-container">
+          <img src="images/default-avatar.png" alt="Foto do perfil" class="profile-avatar">
+          <h1 class="profile-name">Nome Sobrenome</h1>
+        </div>
+        
+        <!-- ÚNICA seção de informações (removi a duplicação) -->
+        <div class="compact-info-section" id="compactInfo">
+          <div class="compact-info-toggle">
+            <i class="fas fa-chevron-down"></i>
+            <span>Informações institucionais</span>
+          </div>
+          <div class="compact-info-content">
+            <div class="compact-info-row">
+              <span class="compact-info-label">Instituição:</span>
+              <span class="compact-info-value">UNIBH</span>
+            </div>
+            <div class="compact-info-row">
+              <span class="compact-info-label">Acesso:</span>
+              <span class="compact-info-value">Aluno(a)</span>
+            </div>
+            <div class="compact-info-row">
+              <span class="compact-info-label">Período:</span>
+              <span class="compact-info-value">4</span>
+            </div>
+            <div class="compact-info-row">
+              <span class="compact-info-label">Curso:</span>
+              <span class="compact-info-value">Psicologia</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Botão Editar
+      const editButton = document.querySelector('.edit-button');
+      if (editButton) {
+        editButton.addEventListener('click', () => {
+          // Implementar lógica de edição aqui
+          console.log('Editar perfil');
+        });
+      }
+
+      const compactInfoToggle = document.querySelector('.compact-info-toggle');
+      if (compactInfoToggle) {
+        compactInfoToggle.addEventListener('click', () => {
+          document.getElementById('compactInfo').classList.toggle('active');
+        });
+      }
+    });
+  </script>
